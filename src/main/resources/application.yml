@@ -1,0 +1,6 @@
+server:
+  port: 8081
+
+external-api:
+  uni-pass:
+    base-url: https://unipass.customs.go.kr:38010
