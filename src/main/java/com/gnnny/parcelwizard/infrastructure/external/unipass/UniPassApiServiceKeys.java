@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.infrastructure.external;
+package com.gnnny.parcelwizard.infrastructure.external.unipass;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

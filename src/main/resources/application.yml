@@ -2,5 +2,15 @@ server:
   port: 8081
 
 external-api:
-  uni-pass:
-    base-url: https://unipass.customs.go.kr:38010
+  customs-clearance:
+    uni-pass:
+      base-url: https://unipass.customs.go.kr:38010
+  delivery:
+    cj-logistics:
+      base-url: https://trace.cjlogistics.com
+    kr-post:
+      base-url:
+    winion-logis:
+      base-url: https://winionlogis.com
+
+
