@@ -1,5 +1,6 @@
-package com.gnnny.parcelwizard.domain;
+package com.gnnny.parcelwizard.domain.cargoclearace;
 
+import com.gnnny.parcelwizard.domain.delivery.Delivery;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
@@ -16,7 +17,7 @@ public class CargoClearance {
     private Delivery delivery;
     private String weight;
 
-    public record CargoClearanceId(Long CargoId) {
-
+    public class CargoClearanceId {
+        private Long CargoId;
     }
 }

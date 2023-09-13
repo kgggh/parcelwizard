@@ -1,6 +1,5 @@
 package com.gnnny.parcelwizard.infrastructure.external.cj;
 
-import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface CjLogisticsClient {
 
     @PostMapping(path = "/web/rest/selectScanInfo.do")
-    Map<String, Object> getDeliveryProgressInfo(@RequestParam("slipno") String trackingNo);
+    CjApiResponse getDeliveryProgressInfo(@RequestParam("slipno") String trackingNo);
 
     @PostMapping(path = "/web/rest/selectWblNoInfoDt.do")
-    Map<String, Object> getDeliveryDetail(@RequestParam("slipno") String trackingNo);
-
+    CjApiResponse getDeliveryDetail(@RequestParam("slipno") String trackingNo);
 }

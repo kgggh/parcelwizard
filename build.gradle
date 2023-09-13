@@ -28,8 +28,9 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    /* orm */
     implementation 'org.springframework.data:spring-data-jpa'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     /* lombok */
     compileOnly 'org.projectlombok:lombok'
@@ -37,6 +38,13 @@ dependencies {
 
     /* jackson xml parse */
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+    /* jsoup */
+    implementation 'org.jsoup:jsoup:1.16.1'
+
+    /* test */
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 dependencyManagement {

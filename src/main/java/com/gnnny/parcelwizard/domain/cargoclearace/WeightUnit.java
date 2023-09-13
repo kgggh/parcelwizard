@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain;
+package com.gnnny.parcelwizard.domain.cargoclearace;
 
 import lombok.Getter;
 

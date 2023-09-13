@@ -9,7 +9,7 @@ external-api:
     cj-logistics:
       base-url: https://trace.cjlogistics.com
     kr-post:
-      base-url:
+      base-url: https://service.epost.go.kr
     winion-logis:
       base-url: https://winionlogis.com
 
