@@ -1,25 +1,13 @@
-# Getting Started
+# 택배마스터
 
-### Reference Documentation
+### 내 택배는 어디쯤 왔을까?
+해외에서 구매하는 물품 혹은 국내 쇼핑몰에서 구매한 물품들의 통관정보 및 배송조회를 제공하는 서비스입니다.
 
-For further reference, please consider the following sections:
+### 개발하게 된 계기
+최근 알리익스프레스 이용중에 알리에서 제공하는 5일 무료배송이 국내 물류센터에 물량 폭증으로 인하여,  
+택배가 딜레이 되는 경우가 많아 트래킹 하기도 어려운 상황이 발생하고 있습니다.  
+이런 문제점을 해소하고자 국내 주요 택배사(위탁업체 포함)의 배송조회와 관세청에서 제공하는 통관정보를 접목해 전체적인 프로세스에 대한 데이터를 제공하고자 개발하게 됐습니다.
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.1.3/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.1.3/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.1.3/reference/htmlsingle/index.html#web)
-
-### Guides
-
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-
-### Additional Links
-
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
+### 주요기능
+- 화물 통관정보 조회
+- 택배사별 배송 조회
