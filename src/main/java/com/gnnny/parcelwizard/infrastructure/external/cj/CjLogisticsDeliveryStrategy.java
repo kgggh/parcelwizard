@@ -63,7 +63,10 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
                         .detailStatus(scanInfoOutput.getBasisSclsfCdNm())
                         .processingDateTime(
                             DateUtil.parse(
-                                String.format("%s %s", scanInfoOutput.getScanDt(), scanInfoOutput.getScanHms())))
+                                String.format("%s %s", scanInfoOutput.getScanDt(),
+                                    scanInfoOutput.getScanHms()),
+                                "yyyy-MM-dd HH:mm:ss")
+                        )
                         .build()).toList()
             ).build();
     }

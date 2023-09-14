@@ -54,7 +54,9 @@ public class WinionLogisParcelStrategy implements ParcelDeliveryStrategy {
                         .location(progressInfo.getLocNm())
                         .status(DeliveryStatus.matchedStatus(progressInfo.getSmartStatNm()))
                         .detailStatus(progressInfo.getStatNm())
-                        .processingDateTime(DateUtil.parse(progressInfo.getWorkDt()))
+                        .processingDateTime(
+                            DateUtil.parse(progressInfo.getWorkDt(), "yyyy-MM-dd HH:mm:ss")
+                        )
                         .build()).toList()
             ).build();
     }

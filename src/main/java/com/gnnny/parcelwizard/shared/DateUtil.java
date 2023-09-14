@@ -7,13 +7,13 @@ import org.apache.logging.log4j.util.Strings;
 
 public class DateUtil {
 
-    public static LocalDateTime parse(String text) {
+    public static LocalDateTime parse(String text, String format) {
         if(Strings.isEmpty(text)) {
             return null;
         }
 
         try {
-            return LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(format));
         } catch (DateTimeParseException e) {
             e.printStackTrace();
         }
