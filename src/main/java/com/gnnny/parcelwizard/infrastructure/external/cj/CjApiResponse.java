@@ -1,15 +1,31 @@
 package com.gnnny.parcelwizard.infrastructure.external.cj;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
-public class CjApiResponse {
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CjApiResponse implements ThirdPartyApiResponse {
 
     private String resultMessage;
     private Integer resultCode;
     private Map<String, Object> data;
+
+    @Override
+    public boolean isSuccess() {
+        return false;
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return null;
+    }
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)

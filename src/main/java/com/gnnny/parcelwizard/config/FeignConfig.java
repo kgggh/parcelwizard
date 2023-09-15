@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.infrastructure.external.config;
+package com.gnnny.parcelwizard.config;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;

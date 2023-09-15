@@ -1,6 +1,5 @@
 package com.gnnny.parcelwizard.infrastructure.external.krpost;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gnnny.parcelwizard.domain.delivery.Delivery;
 import com.gnnny.parcelwizard.domain.delivery.DeliveryCompany;
 import com.gnnny.parcelwizard.domain.delivery.DeliveryProgress;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Component;
 public class KoreaPostDeliveryStrategy implements ParcelDeliveryStrategy {
 
     private final KoreaPostClient koreaPostClient;
-    private final ObjectMapper objectMapper;
 
     @Override
     public Delivery tracking(String trackingNo) {

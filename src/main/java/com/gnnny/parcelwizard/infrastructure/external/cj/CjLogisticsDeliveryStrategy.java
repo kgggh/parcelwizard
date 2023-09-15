@@ -29,6 +29,7 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
     public Delivery tracking(String trackingNo) {
         try {
             CjApiResponse deliveryDetail = cjLogisticsClient.getDeliveryDetail(trackingNo);
+
             WblNoOutput wblNoOutput = objectMapper.convertValue(
                 deliveryDetail.getData().get("wblNoOutput"), WblNoOutput.class);
 
@@ -43,6 +44,7 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage(), e);
         }
+
         return null;
     }
 

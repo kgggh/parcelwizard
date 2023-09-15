@@ -1,0 +1,160 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/web/rest/selectWblNoInfoDt.do",
+        "queryParameters": {
+          "slipno": {
+            "equalTo": ".*"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "data": {
+            "wblNoOutput": {
+              "dlvTel": "010-000-0000",
+              "wblDcd": "01",
+              "rcvrTel": "xxx-5037-****",
+              "picTel": "051-xxx-5503",
+              "dlvBranNm": "경기시흥정왕",
+              "acprRlpNm": "본인",
+              "itmlNm": "에뛰드하우스 룩 앳 마이 아이즈 벨벳 2g",
+              "dlvHpNo": "010-xxxx-4831",
+              "picEmpnoNm": "xxxx",
+              "picBranNm": "부산해운대우1동",
+              "rcvrAddr": "경기도 시흥시 거모동",
+              "picHpNo": "010-xxxx-xxx",
+              "sndrNm": "제*틱",
+              "basisSclsfCdNm": "",
+              "qty": "1",
+              "wblNo": "123492741123",
+              "rltWblNo": "123492741123",
+              "rcvrNm": "x*x",
+              "dlvEmpnoNm": "xxx"
+            }
+          },
+          "resultCode": 200,
+          "resultMessage": "성공"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/web/rest/selectScanInfo.do",
+        "queryParameters": {
+          "slipno": {
+            "equalTo": ".*"
+          }
+        }
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "data": {
+            "scanInfoOutput": [
+              {
+                "branTelno": "",
+                "workHmsCd": "--",
+                "callBackNum": "15881255",
+                "crgStDcd": "91",
+                "empno": "576834",
+                "oposNm": "",
+                "telno": "경기시흥정왕(010-0000-0000)",
+                "patnBranCd": "",
+                "branCd": "3308",
+                "branNm": "경기시흥정왕",
+                "scanDt": "2023-09-09",
+                "basisSclsfCdNm": "배송완료",
+                "scanHms": "16:13:07",
+                "rtlnNo": "",
+                "wblNo": "123492741123",
+                "empynm": "xxx"
+              },
+              {
+                "branTelno": "",
+                "workHmsCd": "17~19시",
+                "callBackNum": "xxxx1255",
+                "crgStDcd": "82",
+                "empno": "576834",
+                "oposNm": "",
+                "telno": "경기시흥정왕(010-0000-0000)",
+                "patnBranCd": "",
+                "branCd": "3308",
+                "branNm": "경기시흥정왕",
+                "scanDt": "2023-09-09",
+                "basisSclsfCdNm": "배송출발",
+                "scanHms": "11:29:20",
+                "rtlnNo": "",
+                "wblNo": "123492741123",
+                "empynm": "xxx"
+              },
+              {
+                "branTelno": "02-xxxx-1255",
+                "workHmsCd": "--",
+                "callBackNum": "15881255",
+                "crgStDcd": "42",
+                "empno": "577623",
+                "oposNm": "",
+                "telno": "시흥1(02-xxxx-xxxx)",
+                "patnBranCd": "V281",
+                "branCd": "V281",
+                "branNm": "시흥1",
+                "scanDt": "2023-09-09",
+                "basisSclsfCdNm": "간선하차",
+                "scanHms": "11:01:52",
+                "rtlnNo": "GLGL0001",
+                "wblNo": "123492741123",
+                "empynm": "휠소터_1라인(시흥1)"
+              },
+              {
+                "branTelno": "02-1588-1255",
+                "workHmsCd": "--",
+                "callBackNum": "15881255",
+                "crgStDcd": "41",
+                "empno": "571697",
+                "oposNm": "",
+                "telno": "",
+                "patnBranCd": "V281",
+                "branCd": "V020",
+                "branNm": "옥천HUB",
+                "scanDt": "2023-09-08",
+                "basisSclsfCdNm": "간선상차",
+                "scanHms": "23:00:14",
+                "rtlnNo": "OOGL0300",
+                "wblNo": "123492741123",
+                "empynm": "B-83-17"
+              },
+              {
+                "branTelno": "",
+                "workHmsCd": "--",
+                "callBackNum": "15881255",
+                "crgStDcd": "11",
+                "empno": "607897",
+                "oposNm": "",
+                "telno": "",
+                "patnBranCd": "",
+                "branCd": "3723",
+                "branNm": "부산해운대우1동",
+                "scanDt": "2023-09-07",
+                "basisSclsfCdNm": "집화처리",
+                "scanHms": "14:12:35",
+                "rtlnNo": "",
+                "wblNo": "123492741123",
+                "empynm": "xxxx"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

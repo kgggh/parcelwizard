@@ -1,0 +1,70 @@
+{
+  "RCVMAN": {
+    "rsCount": "1",
+    "receiver_name": "김*희",
+    "item_nm": "[7]power cord(Cable Winder)*1,vacuum cleaner(Vacuum Cleaner)*1,seat cushion(Automobiles Seat Covers)*1,storage rack(Storage Holders & Racks)*1,phone charger(Mobile Phone Chargers)*1,portable laptop st",
+    "receiver_mobile": "010-****-1234",
+    "receiver_addr": "경기도 용인시 처인구 용인",
+    "sign_way_desc": "기타"
+  },
+  "rescod": true,
+  "DRVMAN": {
+    "agency_nm": "위니온직영",
+    "rsCount": "1",
+    "mobile": "1833-9290",
+    "user_nm": "위니온SM"
+  },
+  "FILIST": [],
+  "resmsg": "처리가 완료되었습니다.",
+  "LIST": [
+    {
+      "stat_nm": "접수",
+      "work_dt": "2023-09-01 09:53:05",
+      "smart_stat_lv": "1",
+      "loc_nm": "위니온로지스",
+      "smart_stat_nm": "배송준비"
+    },
+    {
+      "stat_nm": "집화",
+      "work_dt": "2023-09-05 17:54:50",
+      "smart_stat_lv": "2",
+      "loc_nm": "안성허브터미널",
+      "smart_stat_nm": "집화"
+    },
+    {
+      "stat_nm": "터미널 입고",
+      "work_dt": "2023-09-05 17:54:50",
+      "smart_stat_lv": "2",
+      "loc_nm": "안성허브터미널",
+      "smart_stat_nm": "터미널 입고"
+    },
+    {
+      "stat_nm": "대리점 입고",
+      "work_dt": "2023-09-06 16:31:48",
+      "smart_stat_lv": "4",
+      "loc_nm": "위니온직영",
+      "smart_stat_nm": "대리점 입고"
+    },
+    {
+      "stat_nm": "배송예정(상차)",
+      "work_dt": "2023-09-06 16:31:48",
+      "smart_stat_lv": "4",
+      "loc_nm": "위니온SM",
+      "smart_stat_nm": "배송예정(상차)"
+    },
+    {
+      "stat_nm": "배송출발",
+      "work_dt": "2023-09-06 16:31:48",
+      "smart_stat_lv": "5",
+      "loc_nm": "위니온SM",
+      "smart_stat_nm": "배송출발"
+    },
+    {
+      "stat_nm": "배송완료",
+      "work_dt": "2023-09-07 13:30:59",
+      "smart_stat_lv": "6",
+      "loc_nm": "위니온SM",
+      "smart_stat_nm": "배송완료"
+    }
+  ]
+}

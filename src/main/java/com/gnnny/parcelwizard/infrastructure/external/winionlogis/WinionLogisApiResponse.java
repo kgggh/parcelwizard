@@ -4,12 +4,18 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WinionLogisApiResponse {
+public class WinionLogisApiResponse implements ThirdPartyApiResponse {
 
     private Boolean rescod;
     private String resmsg;
@@ -23,6 +29,15 @@ public class WinionLogisApiResponse {
     @JsonAlias(value = "LIST")
     private List<ProgressInfo> progressInfo;
 
+    @Override
+    public boolean isSuccess() {
+        return rescod;
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return null;
+    }
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)

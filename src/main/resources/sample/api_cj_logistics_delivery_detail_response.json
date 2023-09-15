@@ -1,0 +1,27 @@
+{
+  "data": {
+    "wblNoOutput": {
+      "dlvTel": "010-000-0000",
+      "wblDcd": "01",
+      "rcvrTel": "xxx-5037-****",
+      "picTel": "051-xxx-5503",
+      "dlvBranNm": "경기시흥정왕",
+      "acprRlpNm": "본인",
+      "itmlNm": "에뛰드하우스 룩 앳 마이 아이즈 벨벳 2g",
+      "dlvHpNo": "010-xxxx-4831",
+      "picEmpnoNm": "xxxx",
+      "picBranNm": "부산해운대우1동",
+      "rcvrAddr": "경기도 용인",
+      "picHpNo": "010-xxxx-xxx",
+      "sndrNm": "제*틱",
+      "basisSclsfCdNm": "",
+      "qty": "1",
+      "wblNo": "123492741123",
+      "rltWblNo": "123492741123",
+      "rcvrNm": "x*x",
+      "dlvEmpnoNm": "xxx"
+    }
+  },
+  "resultCode": 200,
+  "resultMessage": "성공"
+}
