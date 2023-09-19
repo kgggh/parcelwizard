@@ -1,6 +1,7 @@
 package com.gnnny.parcelwizard.infrastructure.external.winionlogis;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -55,26 +56,16 @@ class WinionLogisParcelStrategyTest {
 
     @DisplayName("존재하지 않은 운송장 조회시 exception이 발생한다.")
     @Test
-    void notSupportedTrackingInfo() throws IOException {
+    void notSupportedTrackingInfo() throws Exception {
         //given
-        var winionLogisApiResponse = objectMapper.readValue(
-            new ClassPathResource(RESPONSE_FILE_PATH).getFile(),
-            WinionLogisApiResponse.class);
-
         var trackingNo = "1234567890";
-
-        given(winionLogisClient.getDeliveryProgressInfo(any())).willReturn(winionLogisApiResponse);
+        given(winionLogisClient.getDeliveryProgressInfo(any())).willReturn(null);
 
         //when
-        var deliveryInfo = winionLogisParcelStrategy.tracking(trackingNo);
-
         //then
-        assertAll(
-            () -> assertThat(deliveryInfo.getTrackingNo()).isEqualTo(trackingNo),
-            () -> assertThat(deliveryInfo.getDeliveryCompany()).isEqualTo(DeliveryCompany.WINION_LOGIS),
-            () -> assertThat(deliveryInfo.getDeliveryProgresses()).hasSize(7),
-            () -> assertThat(deliveryInfo.getRecipient().getAddress()).contains("경기도 용인")
-        );
+        assertThatThrownBy(() -> winionLogisParcelStrategy.tracking(trackingNo))
+            .isInstanceOfAny(NullPointerException.class);
+
     }
 
     @Test

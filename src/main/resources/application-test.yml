@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+external-api:
+  customs-clearance:
+    uni-pass:
+      base-url: http://localhost:33333
+  delivery:
+    cj-logistics:
+      base-url: http://localhost:33333
+    kr-post:
+      base-url: http://localhost:33333
+    winion-logis:
+      base-url: http://localhost:33333
+
+

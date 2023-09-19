@@ -41,11 +41,11 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
                     });
 
             return toDomain(wblNoOutput, scanInfoOutput);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             log.error(e.getMessage(), e);
+            throw e;
         }
 
-        return null;
     }
 
     private Delivery toDomain(WblNoOutput wblNoOutput, List<ScanInfoOutput> scanInfoOutputs) {

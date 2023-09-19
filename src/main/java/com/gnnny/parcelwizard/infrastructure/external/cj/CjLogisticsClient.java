@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface CjLogisticsClient {
 
     @PostMapping(path = "/web/rest/selectScanInfo.do")
-    CjApiResponse getDeliveryProgressInfo(@RequestParam("slipno") String slipno);
+    CjApiResponse getDeliveryProgressInfo(@RequestParam(name = "slipno") String trackingNo);
 
     @PostMapping(path = "/web/rest/selectWblNoInfoDt.do")
-    CjApiResponse getDeliveryDetail(@RequestParam("slipno") String trackingNo);
+    CjApiResponse getDeliveryDetail(@RequestParam(name = "slipno") String trackingNo);
 }

@@ -29,11 +29,10 @@ public class WinionLogisParcelStrategy implements ParcelDeliveryStrategy {
                 new DeliveryProgressSearchRequestDto(trackingNo));
 
             return toDomain(trackingNo, winionLogisApiResponse);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             log.error(e.getMessage(), e);
+            throw e;
         }
-
-        return null;
     }
 
     private Delivery toDomain(String trackingNo, WinionLogisApiResponse winionLogisApiResponse) {

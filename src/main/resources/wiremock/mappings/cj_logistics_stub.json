@@ -3,10 +3,10 @@
     {
       "request": {
         "method": "POST",
-        "url": "/web/rest/selectWblNoInfoDt.do",
+        "urlPath": "/web/rest/selectWblNoInfoDt.do",
         "queryParameters": {
           "slipno": {
-            "equalTo": ".*"
+            "matches": ".*"
           }
         }
       },
@@ -25,13 +25,13 @@
               "dlvHpNo": "010-xxxx-4831",
               "picEmpnoNm": "xxxx",
               "picBranNm": "부산해운대우1동",
-              "rcvrAddr": "경기도 시흥시 거모동",
+              "rcvrAddr": "경기도 용인",
               "picHpNo": "010-xxxx-xxx",
               "sndrNm": "제*틱",
               "basisSclsfCdNm": "",
               "qty": "1",
-              "wblNo": "123492741123",
-              "rltWblNo": "123492741123",
+              "wblNo": "1234567890",
+              "rltWblNo": "1234567890",
               "rcvrNm": "x*x",
               "dlvEmpnoNm": "xxx"
             }
@@ -47,10 +47,10 @@
     {
       "request": {
         "method": "POST",
-        "url": "/web/rest/selectScanInfo.do",
+        "urlPath": "/web/rest/selectScanInfo.do",
         "queryParameters": {
           "slipno": {
-            "equalTo": ".*"
+            "matches": ".*"
           }
         }
       },
@@ -76,7 +76,7 @@
                 "basisSclsfCdNm": "배송완료",
                 "scanHms": "16:13:07",
                 "rtlnNo": "",
-                "wblNo": "123492741123",
+                "wblNo": "1234567890",
                 "empynm": "xxx"
               },
               {
@@ -94,7 +94,7 @@
                 "basisSclsfCdNm": "배송출발",
                 "scanHms": "11:29:20",
                 "rtlnNo": "",
-                "wblNo": "123492741123",
+                "wblNo": "1234567890",
                 "empynm": "xxx"
               },
               {
@@ -112,7 +112,7 @@
                 "basisSclsfCdNm": "간선하차",
                 "scanHms": "11:01:52",
                 "rtlnNo": "GLGL0001",
-                "wblNo": "123492741123",
+                "wblNo": "1234567890",
                 "empynm": "휠소터_1라인(시흥1)"
               },
               {
@@ -130,7 +130,7 @@
                 "basisSclsfCdNm": "간선상차",
                 "scanHms": "23:00:14",
                 "rtlnNo": "OOGL0300",
-                "wblNo": "123492741123",
+                "wblNo": "1234567890",
                 "empynm": "B-83-17"
               },
               {
@@ -148,7 +148,7 @@
                 "basisSclsfCdNm": "집화처리",
                 "scanHms": "14:12:35",
                 "rtlnNo": "",
-                "wblNo": "123492741123",
+                "wblNo": "1234567890",
                 "empynm": "xxxx"
               }
             ]
