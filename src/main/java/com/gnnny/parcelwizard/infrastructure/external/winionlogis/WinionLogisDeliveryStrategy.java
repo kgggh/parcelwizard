@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WinionLogisParcelStrategy implements ParcelDeliveryStrategy {
+public class WinionLogisDeliveryStrategy implements ParcelDeliveryStrategy {
 
     private final WinionLogisClient winionLogisClient;
 

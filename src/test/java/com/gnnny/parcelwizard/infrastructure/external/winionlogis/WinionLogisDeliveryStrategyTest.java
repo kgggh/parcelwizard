@@ -18,13 +18,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
 @ExtendWith(MockitoExtension.class)
-class WinionLogisParcelStrategyTest {
+class WinionLogisDeliveryStrategyTest {
 
     @Mock
     private WinionLogisClient winionLogisClient;
 
     @InjectMocks
-    private WinionLogisParcelStrategy winionLogisParcelStrategy;
+    private WinionLogisDeliveryStrategy winionLogisDeliveryStrategy;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -43,7 +43,7 @@ class WinionLogisParcelStrategyTest {
         given(winionLogisClient.getDeliveryProgressInfo(any())).willReturn(winionLogisApiResponse);
 
         //when
-        var deliveryInfo = winionLogisParcelStrategy.tracking(trackingNo);
+        var deliveryInfo = winionLogisDeliveryStrategy.tracking(trackingNo);
 
         //then
         assertAll(
@@ -63,7 +63,7 @@ class WinionLogisParcelStrategyTest {
 
         //when
         //then
-        assertThatThrownBy(() -> winionLogisParcelStrategy.tracking(trackingNo))
+        assertThatThrownBy(() -> winionLogisDeliveryStrategy.tracking(trackingNo))
             .isInstanceOfAny(NullPointerException.class);
 
     }
@@ -74,7 +74,7 @@ class WinionLogisParcelStrategyTest {
         var deliveryCompanyName= DeliveryCompany.WINION_LOGIS;
 
         //when
-        var parcelCompanyName = winionLogisParcelStrategy.getParcelCompanyName();
+        var parcelCompanyName = winionLogisDeliveryStrategy.getParcelCompanyName();
 
         //then
         assertThat(parcelCompanyName.name()).isEqualTo(deliveryCompanyName.name());
