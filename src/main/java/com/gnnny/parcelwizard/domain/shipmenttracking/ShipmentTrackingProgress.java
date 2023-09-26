@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain.delivery;
+package com.gnnny.parcelwizard.domain.shipmenttracking;
 
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DeliveryProgress {
+public class ShipmentTrackingProgress {
     private String location;
-    private DeliveryStatus status;
+    private ShipmentTrackingStatus status;
     private String detailStatus;
     private LocalDateTime processingDateTime;
 
     @Builder
-    public DeliveryProgress(String location, DeliveryStatus status, String detailStatus,
+    public ShipmentTrackingProgress(String location, ShipmentTrackingStatus status, String detailStatus,
         LocalDateTime processingDateTime) {
         this.location = location;
         this.status = status;

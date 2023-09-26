@@ -17,6 +17,18 @@ public class CargoClearanceProgressDto {
     // 운송장 번호
     private String hblNo;
 
+    //적재항명
+    private String prnm;
+
+    //총 중량
+    private String ttwg;
+
+    //중량 단위
+    private String wghtUt;
+
+    //포워더 명
+    private String frwrEntsConm;
+
     @JacksonXmlProperty(localName = "cargCsclPrgsInfoDtlQryVo")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Progress> progresses;

@@ -7,7 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnnny.parcelwizard.domain.delivery.DeliveryCompany;
+import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
 import java.io.IOException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
 @ExtendWith(MockitoExtension.class)
-class WinionLogisDeliveryStrategyTest {
+class WinionLogisShipmentTrackingStrategyTest {
 
     @Mock
     private WinionLogisClient winionLogisClient;
@@ -48,8 +48,8 @@ class WinionLogisDeliveryStrategyTest {
         //then
         assertAll(
             () -> assertThat(deliveryInfo.getTrackingNo()).isEqualTo(trackingNo),
-            () -> assertThat(deliveryInfo.getDeliveryCompany()).isEqualTo(DeliveryCompany.WINION_LOGIS),
-            () -> assertThat(deliveryInfo.getDeliveryProgresses()).hasSize(7),
+            () -> assertThat(deliveryInfo.getCourierCompany()).isEqualTo(CourierCompany.WINION_LOGIS),
+            () -> assertThat(deliveryInfo.getShipmentTrackingProgresses()).hasSize(7),
             () -> assertThat(deliveryInfo.getRecipient().getAddress()).contains("경기도 용인")
         );
     }
@@ -71,10 +71,10 @@ class WinionLogisDeliveryStrategyTest {
     @Test
     void getParcelCompanyName() {
         //given
-        var deliveryCompanyName= DeliveryCompany.WINION_LOGIS;
+        var deliveryCompanyName= CourierCompany.WINION_LOGIS;
 
         //when
-        var parcelCompanyName = winionLogisDeliveryStrategy.getParcelCompanyName();
+        var parcelCompanyName = winionLogisDeliveryStrategy.getCourierCompanyName();
 
         //then
         assertThat(parcelCompanyName.name()).isEqualTo(deliveryCompanyName.name());

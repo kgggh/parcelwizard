@@ -2,13 +2,13 @@ package com.gnnny.parcelwizard.infrastructure.external.cj;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnnny.parcelwizard.domain.delivery.DeliveryCompany;
-import com.gnnny.parcelwizard.domain.delivery.Delivery;
-import com.gnnny.parcelwizard.domain.delivery.DeliveryProgress;
-import com.gnnny.parcelwizard.domain.delivery.DeliveryStatus;
-import com.gnnny.parcelwizard.domain.delivery.Recipient;
-import com.gnnny.parcelwizard.domain.delivery.Sender;
-import com.gnnny.parcelwizard.domain.delivery.service.ParcelDeliveryStrategy;
+import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTracking;
+import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingProgress;
+import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingStatus;
+import com.gnnny.parcelwizard.domain.shipmenttracking.Recipient;
+import com.gnnny.parcelwizard.domain.shipmenttracking.Sender;
+import com.gnnny.parcelwizard.domain.shipmenttracking.service.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.ScanInfoOutput;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.WblNoOutput;
 import com.gnnny.parcelwizard.shared.DateUtil;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
+public class CjLogisticsDeliveryStrategy implements ShipmentTrackingStrategy {
 
     private final CjLogisticsClient cjLogisticsClient;
     private final ObjectMapper objectMapper;
 
     @Override
-    public Delivery tracking(String trackingNo) {
+    public ShipmentTracking tracking(String trackingNo) {
         try {
             CjApiResponse deliveryDetail = cjLogisticsClient.getDeliveryDetail(trackingNo);
 
@@ -48,20 +48,20 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
 
     }
 
-    private Delivery toDomain(WblNoOutput wblNoOutput, List<ScanInfoOutput> scanInfoOutputs) {
-        return Delivery.builder()
+    private ShipmentTracking toDomain(WblNoOutput wblNoOutput, List<ScanInfoOutput> scanInfoOutputs) {
+        return ShipmentTracking.builder()
             .trackingNo(wblNoOutput.getWblNo())
-            .deliveryCompany(DeliveryCompany.CJ_LOGISTICS)
+            .courierCompany(CourierCompany.CJ_LOGISTICS)
             .recipient(
                 new Recipient(wblNoOutput.getRcvrNm(), wblNoOutput.getRcvrTel(),
                     wblNoOutput.getRcvrAddr())
             )
             .sender(new Sender(wblNoOutput.getSndrNm(), "", ""))
-            .deliveryProgresses(scanInfoOutputs.stream()
+            .shipmentTrackingProgresses(scanInfoOutputs.stream()
                 .map(
-                    scanInfoOutput -> DeliveryProgress.builder()
+                    scanInfoOutput -> ShipmentTrackingProgress.builder()
                         .location(scanInfoOutput.getBranNm())
-                        .status(DeliveryStatus.matchedStatus(scanInfoOutput.getBasisSclsfCdNm()))
+                        .status(ShipmentTrackingStatus.matchedStatus(scanInfoOutput.getBasisSclsfCdNm()))
                         .detailStatus(scanInfoOutput.getBasisSclsfCdNm())
                         .processingDateTime(
                             DateUtil.parse(
@@ -74,8 +74,8 @@ public class CjLogisticsDeliveryStrategy implements ParcelDeliveryStrategy {
     }
 
     @Override
-    public DeliveryCompany getParcelCompanyName() {
-        return DeliveryCompany.CJ_LOGISTICS;
+    public CourierCompany getCourierCompanyName() {
+        return CourierCompany.CJ_LOGISTICS;
     }
 
 }

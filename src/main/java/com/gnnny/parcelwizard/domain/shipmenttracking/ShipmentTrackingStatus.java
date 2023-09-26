@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain.delivery;
+package com.gnnny.parcelwizard.domain.shipmenttracking;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 
 @Getter
-public enum DeliveryStatus {
+public enum ShipmentTrackingStatus {
     PENDING("배송 준비 중", List.of("접수")),
     IN_TRANSIT("배송 중", List.of("배송출발", "집화", "터미널입고", "입고", "상차")),
     DELIVERED("배송 완료", List.of("배송완료", "완료")),
@@ -16,19 +16,19 @@ public enum DeliveryStatus {
     private final String value;
     private final List<String> detailStatus;
 
-    DeliveryStatus(String value, List<String> detailStatus) {
+    ShipmentTrackingStatus(String value, List<String> detailStatus) {
         this.value = value;
         this.detailStatus = detailStatus;
     }
 
-    public static DeliveryStatus matchedStatus(String text) {
+    public static ShipmentTrackingStatus matchedStatus(String text) {
         if (Strings.isEmpty(text) || text.equals(" ")) {
             return PENDING;
         }
 
         String withoutSpacesText = text.replaceAll("\\s+", "");
 
-        return Arrays.stream(DeliveryStatus.values())
+        return Arrays.stream(ShipmentTrackingStatus.values())
             .filter(status -> status.getDetailStatus().contains(withoutSpacesText))
             .findAny()
             .orElse(IN_TRANSIT);

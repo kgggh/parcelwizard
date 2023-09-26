@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.gnnny.parcelwizard.domain.delivery.DeliveryCompany;
+import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,7 +20,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
-class CjLogisticsDeliveryStrategyTest {
+class CjLogisticsShipmentTrackingStrategyTest {
 
     @Autowired
     private CjLogisticsDeliveryStrategy cjLogisticsDeliveryStrategy;
@@ -56,8 +56,8 @@ class CjLogisticsDeliveryStrategyTest {
         //then
         assertAll(
             () -> assertThat(deliveryInfo.getTrackingNo()).isEqualTo(trackingNo),
-            () -> assertThat(deliveryInfo.getDeliveryCompany()).isEqualTo(DeliveryCompany.CJ_LOGISTICS),
-            () -> assertThat(deliveryInfo.getDeliveryProgresses()).hasSize(5),
+            () -> assertThat(deliveryInfo.getCourierCompany()).isEqualTo(CourierCompany.CJ_LOGISTICS),
+            () -> assertThat(deliveryInfo.getShipmentTrackingProgresses()).hasSize(5),
             () -> assertThat(deliveryInfo.getRecipient().getAddress()).contains("경기도 용인")
         );
 

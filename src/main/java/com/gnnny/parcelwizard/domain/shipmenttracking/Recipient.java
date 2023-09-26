@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain.delivery;
+package com.gnnny.parcelwizard.domain.shipmenttracking;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
