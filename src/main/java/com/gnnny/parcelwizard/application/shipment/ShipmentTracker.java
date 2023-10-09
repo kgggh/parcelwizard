@@ -1,6 +1,6 @@
-package com.gnnny.parcelwizard.domain.shipmenttracking.service;
+package com.gnnny.parcelwizard.application.shipment;
 
-import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShipmentTracker {
 
-    private Map<CourierCompany, ShipmentTrackingStrategy> deliveryStrategies;
+    private Map<CourierCompany, ShipmentTrackingStrategy> shipmentStrategies;
 
     public ShipmentTracker(Set<ShipmentTrackingStrategy> parcelDeliveryStrategies) {
         initialize(parcelDeliveryStrategies);
@@ -20,16 +20,15 @@ public class ShipmentTracker {
             throw new IllegalArgumentException("택배회사를 확인해주세요.");
         }
 
-        return this.deliveryStrategies.get(courierCompany);
+        return this.shipmentStrategies.get(courierCompany);
     }
 
     private void initialize(Set<ShipmentTrackingStrategy> parcelDeliveryStrategies) {
-        this.deliveryStrategies = new EnumMap<>(CourierCompany.class);
+        this.shipmentStrategies = new EnumMap<>(CourierCompany.class);
 
         for (ShipmentTrackingStrategy shipmentTrackingStrategy : parcelDeliveryStrategies) {
-            deliveryStrategies.put(shipmentTrackingStrategy.getCourierCompanyName(),
+            shipmentStrategies.put(shipmentTrackingStrategy.getCourierCompanyName(),
                 shipmentTrackingStrategy);
         }
-        System.out.println(deliveryStrategies);
     }
 }

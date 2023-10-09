@@ -7,7 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
 import java.io.IOException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
 @ExtendWith(MockitoExtension.class)
-class WinionLogisShipmentTrackingStrategyTest {
+class WinionLogisShipmentStrategyTest {
 
     @Mock
     private WinionLogisClient winionLogisClient;
@@ -49,14 +49,14 @@ class WinionLogisShipmentTrackingStrategyTest {
         assertAll(
             () -> assertThat(deliveryInfo.getTrackingNo()).isEqualTo(trackingNo),
             () -> assertThat(deliveryInfo.getCourierCompany()).isEqualTo(CourierCompany.WINION_LOGIS),
-            () -> assertThat(deliveryInfo.getShipmentTrackingProgresses()).hasSize(7),
+            () -> assertThat(deliveryInfo.getShipmentProgresses()).hasSize(7),
             () -> assertThat(deliveryInfo.getRecipient().getAddress()).contains("경기도 용인")
         );
     }
 
     @DisplayName("존재하지 않은 운송장 조회시 exception이 발생한다.")
     @Test
-    void notSupportedTrackingInfo() throws Exception {
+    void notSupportedTrackingInfo() {
         //given
         var trackingNo = "1234567890";
         given(winionLogisClient.getDeliveryProgressInfo(any())).willReturn(null);
@@ -69,14 +69,14 @@ class WinionLogisShipmentTrackingStrategyTest {
     }
 
     @Test
-    void getParcelCompanyName() {
+    void getCourierCompanyName() {
         //given
         var deliveryCompanyName= CourierCompany.WINION_LOGIS;
 
         //when
-        var parcelCompanyName = winionLogisDeliveryStrategy.getCourierCompanyName();
+        var courierCompanyName = winionLogisDeliveryStrategy.getCourierCompanyName();
 
         //then
-        assertThat(parcelCompanyName.name()).isEqualTo(deliveryCompanyName.name());
+        assertThat(courierCompanyName.name()).isEqualTo(deliveryCompanyName.name());
     }
 }

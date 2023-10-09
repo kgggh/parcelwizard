@@ -1,6 +1,10 @@
 server:
   port: 8081
 
+springdoc:
+  swagger-ui:
+    path: /api-doc
+
 external-api:
   customs-clearance:
     uni-pass:
@@ -12,5 +16,3 @@ external-api:
       base-url: https://service.epost.go.kr
     winion-logis:
       base-url: https://winionlogis.com
-
-

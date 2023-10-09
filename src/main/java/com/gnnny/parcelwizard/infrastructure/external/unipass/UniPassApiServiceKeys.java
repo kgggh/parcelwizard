@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.core.io.ClassPathResource;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,7 +21,7 @@ public class UniPassApiServiceKeys {
 
         try {
             values = objectMapper.readValue(new File(
-                new ClassPathResource("unipass_serivce_key.json").getFile().getPath()),
+                new ClassPathResource("key/unipass_serivce_key.json").getFile().getPath()),
                 new TypeReference<>() {}
             );
         } catch (IOException e) {
@@ -29,11 +29,24 @@ public class UniPassApiServiceKeys {
         }
     }
 
-    public static String getServiceKey(String serivceName) {
-        if (Strings.isEmpty(serivceName)) {
+    public static String getServiceKey(UniPassApiServiceName uniPassApiServiceName) {
+        if (uniPassApiServiceName == null) {
             throw new IllegalArgumentException("사용하고자 하는 서비스를 입력해주세요.");
         }
 
-        return values.get(serivceName);
+        return values.get(uniPassApiServiceName.getServiceId());
+    }
+
+    @Getter
+    enum UniPassApiServiceName {
+        CARGO_CUSTOMS_CLEARANCE_PROGRESS("API001", "화물 통관 진행정보 조회");
+
+        private final String serviceId;
+        private final String description;
+
+        UniPassApiServiceName(String serviceId, String description) {
+            this.serviceId = serviceId;
+            this.description = description;
+        }
     }
 }

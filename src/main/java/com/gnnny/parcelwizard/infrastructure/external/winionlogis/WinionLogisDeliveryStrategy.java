@@ -1,12 +1,12 @@
 package com.gnnny.parcelwizard.infrastructure.external.winionlogis;
 
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTracking;
-import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingProgress;
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingStatus;
-import com.gnnny.parcelwizard.domain.shipmenttracking.Recipient;
-import com.gnnny.parcelwizard.domain.shipmenttracking.Sender;
-import com.gnnny.parcelwizard.domain.shipmenttracking.service.ShipmentTrackingStrategy;
+import com.gnnny.parcelwizard.domain.shipment.Shipment;
+import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
+import com.gnnny.parcelwizard.domain.shipment.Recipient;
+import com.gnnny.parcelwizard.domain.shipment.Sender;
+import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.ProgressInfo;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.RecipientInfo;
 import com.gnnny.parcelwizard.shared.DateUtil;
@@ -23,10 +23,10 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
     private final WinionLogisClient winionLogisClient;
 
     @Override
-    public ShipmentTracking tracking(String trackingNo) {
+    public Shipment tracking(String trackingNo) {
         try {
             WinionLogisApiResponse winionLogisApiResponse = winionLogisClient.getDeliveryProgressInfo(
-                new DeliveryProgressSearchRequestDto(trackingNo));
+                new DeliveryProgressSearchRequest(trackingNo));
 
             return toDomain(trackingNo, winionLogisApiResponse);
         } catch (IllegalArgumentException | NullPointerException e) {
@@ -35,11 +35,11 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
         }
     }
 
-    private ShipmentTracking toDomain(String trackingNo, WinionLogisApiResponse winionLogisApiResponse) {
+    private Shipment toDomain(String trackingNo, WinionLogisApiResponse winionLogisApiResponse) {
         RecipientInfo recipientInfo = winionLogisApiResponse.getRecipientInfo();
         List<ProgressInfo> progressInfos = winionLogisApiResponse.getProgressInfo();
 
-        return ShipmentTracking.builder()
+        return Shipment.builder()
             .trackingNo(trackingNo)
             .courierCompany(CourierCompany.WINION_LOGIS)
             .recipient(
@@ -47,11 +47,11 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
                     recipientInfo.getReceiverAddr())
             )
             .sender(new Sender("", "", ""))
-            .shipmentTrackingProgresses(progressInfos.stream()
+            .shipmentProgresses(progressInfos.stream()
                 .map(
-                    progressInfo -> ShipmentTrackingProgress.builder()
+                    progressInfo -> ShipmentProgress.builder()
                         .location(progressInfo.getLocNm())
-                        .status(ShipmentTrackingStatus.matchedStatus(progressInfo.getSmartStatNm()))
+                        .status(ShipmentStatus.matchedStatus(progressInfo.getSmartStatNm()))
                         .detailStatus(progressInfo.getStatNm())
                         .processingDateTime(
                             DateUtil.parse(progressInfo.getWorkDt(), "yyyy-MM-dd HH:mm:ss")

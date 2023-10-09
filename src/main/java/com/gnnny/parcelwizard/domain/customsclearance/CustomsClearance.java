@@ -11,21 +11,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CustomsClearance {
 
-    private CargoClearanceId cargoClearanceId;
+    private CustomsClearanceId customsClearanceId;
     private String houseBlNo;
-    private List<CustomsClearanceProgress> customsClearanceProgresses = new ArrayList<>();
+    private String itemName;
     private Weight weight;
+    private List<CustomsClearanceProgress> customsClearanceProgresses = new ArrayList<>();
 
     @Builder
-    public CustomsClearance(CargoClearanceId cargoClearanceId, String houseBlNo,
-        List<CustomsClearanceProgress> customsClearanceProgresses, Weight weight) {
-        this.cargoClearanceId = cargoClearanceId;
+    public CustomsClearance(CustomsClearanceId customsClearanceId, String houseBlNo, String itemName,
+        Weight weight, List<CustomsClearanceProgress> customsClearanceProgresses) {
+        this.customsClearanceId = customsClearanceId;
         this.houseBlNo = houseBlNo;
-        this.customsClearanceProgresses = customsClearanceProgresses;
+        this.itemName = itemName;
         this.weight = weight;
+        this.customsClearanceProgresses = customsClearanceProgresses;
     }
 
-    public class CargoClearanceId {
-        private Long cargoClearanceId;
+    @Getter
+    public static class CustomsClearanceId {
+        private Long id;
     }
 }

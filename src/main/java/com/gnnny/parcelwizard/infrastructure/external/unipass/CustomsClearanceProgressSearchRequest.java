@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CargoClearanceProgressSearchRequestDto {
+public class CustomsClearanceProgressSearchRequest {
 
     // 인증키
     private String crkyCn;

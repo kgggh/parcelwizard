@@ -1,13 +1,10 @@
 package com.gnnny.parcelwizard.config;
 
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import feign.Logger;
 import feign.Request;
 import feign.Response;
 import feign.Util;
-import feign.codec.Decoder;
 import java.io.IOException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Slf4j
 public class FeignConfig {
 
     /**
@@ -33,15 +29,6 @@ public class FeignConfig {
     @Bean
     public Logger customLogger() {
         return new FeignCustomLogger();
-    }
-
-    @Bean
-    public Decoder feignDecoder() {
-        return (response, type) -> {
-            String bodyStr = Util.toString(response.body().asReader(Util.UTF_8));
-            JavaType javaType = TypeFactory.defaultInstance().constructType(type);
-            return new ObjectMapper().readValue(bodyStr, javaType);
-        };
     }
 
     @Slf4j

@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain.shipmenttracking;
+package com.gnnny.parcelwizard.domain.shipment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,26 +9,27 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ShipmentTracking {
+public class Shipment {
 
-    private DeliveryId deliveryId;
+    private ShipmentId shipmentId;
     private String trackingNo;
     private CourierCompany courierCompany;
     private Recipient recipient;
     private Sender sender;
-    private List<ShipmentTrackingProgress> shipmentTrackingProgresses = new ArrayList<>();
+    private List<ShipmentProgress> shipmentProgresses = new ArrayList<>();
 
     @Builder
-    public ShipmentTracking(String trackingNo, CourierCompany courierCompany, Recipient recipient,
-        Sender sender, List<ShipmentTrackingProgress> shipmentTrackingProgresses) {
+    public Shipment(String trackingNo, CourierCompany courierCompany, Recipient recipient,
+        Sender sender, List<ShipmentProgress> shipmentProgresses) {
         this.trackingNo = trackingNo;
         this.courierCompany = courierCompany;
         this.recipient = recipient;
         this.sender = sender;
-        this.shipmentTrackingProgresses = shipmentTrackingProgresses;
+        this.shipmentProgresses = shipmentProgresses;
     }
 
-    public class DeliveryId {
-        private Long deliveryId;
+    @Getter
+    public static class ShipmentId {
+        private Long id;
     }
 }

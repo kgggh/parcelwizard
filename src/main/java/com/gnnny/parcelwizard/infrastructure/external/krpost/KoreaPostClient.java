@@ -24,25 +24,30 @@ public class KoreaPostClient {
     private String baseUrl;
 
     public KoreaPostApiResponse getDeliveryProgressInfo(String trackingNo) {
+        String requestUrl = makeGetTrackingInfoQueryUrl(trackingNo);
+        Document document = connect(requestUrl);
+
+        DeliveryDetail deliveryDetail = extractDeliveryDetail(
+            document.select("#print > .table_col > tbody > tr"));
+
+        List<DeliveryProgress> deliveryProgresses = extractDeliveryProgresses(
+            document.select("#processTable > tbody > tr"));
+
+        return new KoreaPostApiResponse(deliveryDetail, deliveryProgresses);
+    }
+
+    private Document connect(String url) {
         try {
-            String requestUrl = makeGetTrackingInfoQueryUrl(trackingNo);
-            Document document = Jsoup.connect(requestUrl).get();
-
-            DeliveryDetail deliveryDetail = extractDeliveryDetail(
-                document.select("#print > .table_col > tbody > tr"));
-            List<DeliveryProgress> deliveryProgresses = extractDeliveryProgresses(
-                document.select("#processTable > tbody > tr"));
-
-            return new KoreaPostApiResponse(deliveryDetail, deliveryProgresses);
+            return Jsoup.connect(url).get();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
+            throw new IllegalStateException("해당 URL에 대해 응답이 없습니다.");
         }
-
-        return null;
     }
 
     private String makeGetTrackingInfoQueryUrl(String trackingNo) {
         String uri = "/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1={trackingNo}";
+
         return UriComponentsBuilder
             .fromHttpUrl(baseUrl + uri)
             .buildAndExpand(trackingNo)
@@ -52,8 +57,8 @@ public class KoreaPostClient {
     private DeliveryDetail extractDeliveryDetail(Elements elements) {
         String[] extractDeliveryDetailTexts = extractTexts(elements);
 
-        if (extractDeliveryDetailTexts.length == 0) {
-            return new DeliveryDetail();
+        if (extractDeliveryDetailTexts.length < 3) {
+            throw new IllegalStateException("조회되지 않는 운송장 번호입니다.");
         }
 
         return new DeliveryDetail(

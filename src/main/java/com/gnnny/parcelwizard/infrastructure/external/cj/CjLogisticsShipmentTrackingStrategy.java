@@ -2,13 +2,13 @@ package com.gnnny.parcelwizard.infrastructure.external.cj;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTracking;
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingProgress;
-import com.gnnny.parcelwizard.domain.shipmenttracking.ShipmentTrackingStatus;
-import com.gnnny.parcelwizard.domain.shipmenttracking.Recipient;
-import com.gnnny.parcelwizard.domain.shipmenttracking.Sender;
-import com.gnnny.parcelwizard.domain.shipmenttracking.service.ShipmentTrackingStrategy;
+import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipment.Shipment;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
+import com.gnnny.parcelwizard.domain.shipment.Recipient;
+import com.gnnny.parcelwizard.domain.shipment.Sender;
+import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.ScanInfoOutput;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.WblNoOutput;
 import com.gnnny.parcelwizard.shared.DateUtil;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CjLogisticsDeliveryStrategy implements ShipmentTrackingStrategy {
+public class CjLogisticsShipmentTrackingStrategy implements ShipmentTrackingStrategy {
 
     private final CjLogisticsClient cjLogisticsClient;
     private final ObjectMapper objectMapper;
 
     @Override
-    public ShipmentTracking tracking(String trackingNo) {
+    public Shipment tracking(String trackingNo) {
         try {
             CjApiResponse deliveryDetail = cjLogisticsClient.getDeliveryDetail(trackingNo);
 
@@ -48,8 +48,8 @@ public class CjLogisticsDeliveryStrategy implements ShipmentTrackingStrategy {
 
     }
 
-    private ShipmentTracking toDomain(WblNoOutput wblNoOutput, List<ScanInfoOutput> scanInfoOutputs) {
-        return ShipmentTracking.builder()
+    private Shipment toDomain(WblNoOutput wblNoOutput, List<ScanInfoOutput> scanInfoOutputs) {
+        return Shipment.builder()
             .trackingNo(wblNoOutput.getWblNo())
             .courierCompany(CourierCompany.CJ_LOGISTICS)
             .recipient(
@@ -57,11 +57,11 @@ public class CjLogisticsDeliveryStrategy implements ShipmentTrackingStrategy {
                     wblNoOutput.getRcvrAddr())
             )
             .sender(new Sender(wblNoOutput.getSndrNm(), "", ""))
-            .shipmentTrackingProgresses(scanInfoOutputs.stream()
+            .shipmentProgresses(scanInfoOutputs.stream()
                 .map(
-                    scanInfoOutput -> ShipmentTrackingProgress.builder()
+                    scanInfoOutput -> ShipmentProgress.builder()
                         .location(scanInfoOutput.getBranNm())
-                        .status(ShipmentTrackingStatus.matchedStatus(scanInfoOutput.getBasisSclsfCdNm()))
+                        .status(ShipmentStatus.matchedStatus(scanInfoOutput.getBasisSclsfCdNm()))
                         .detailStatus(scanInfoOutput.getBasisSclsfCdNm())
                         .processingDateTime(
                             DateUtil.parse(

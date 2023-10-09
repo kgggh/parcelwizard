@@ -1,13 +1,13 @@
 package com.gnnny.parcelwizard.domain.customsclearance;
 
 import lombok.Getter;
-import org.apache.logging.log4j.util.Strings;
+import org.springframework.util.StringUtils;
 
 @Getter
 public enum WeightUnit {
-    KG("Kilogram"),
-    G("Gram"),
-    LB("Pound");
+    KG("kg"),
+    G("g"),
+    LB("lb");
 
     private final String value;
 
@@ -16,7 +16,7 @@ public enum WeightUnit {
     }
 
     public static WeightUnit find(String value) {
-        if(Strings.isEmpty(value)) {
+        if(!StringUtils.hasText(value)) {
             return null;
         }
 

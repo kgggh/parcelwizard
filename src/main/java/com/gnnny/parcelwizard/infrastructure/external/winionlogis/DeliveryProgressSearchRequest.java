@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class DeliveryProgressSearchRequestDto {
+public class DeliveryProgressSearchRequest {
 
     @JsonProperty(value = "PROC_KIND")
     private String procKind = "selTrackingInfoUser";
@@ -12,7 +12,7 @@ public class DeliveryProgressSearchRequestDto {
     @JsonProperty(value = "tracking_no")
     private String trackingNo;
 
-    public DeliveryProgressSearchRequestDto(String trackingNo) {
+    public DeliveryProgressSearchRequest(String trackingNo) {
         this.trackingNo = trackingNo;
     }
 }

@@ -1,4 +1,4 @@
-package com.gnnny.parcelwizard.domain.shipmenttracking;
+package com.gnnny.parcelwizard.domain.shipment;
 
 import lombok.Getter;
 

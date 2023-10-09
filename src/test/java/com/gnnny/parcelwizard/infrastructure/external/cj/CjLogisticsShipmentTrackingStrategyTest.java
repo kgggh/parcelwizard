@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.gnnny.parcelwizard.domain.shipmenttracking.CourierCompany;
+import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
 class CjLogisticsShipmentTrackingStrategyTest {
 
     @Autowired
-    private CjLogisticsDeliveryStrategy cjLogisticsDeliveryStrategy;
+    private CjLogisticsShipmentTrackingStrategy cjLogisticsShipmentTrackingStrategy;
 
     public static WireMockServer wiremock =
         new WireMockServer(WireMockSpring.options().port(33333).usingFilesUnderClasspath("wiremock"));
@@ -51,13 +51,13 @@ class CjLogisticsShipmentTrackingStrategyTest {
         var trackingNo = "1234567890";
 
         //when
-        var deliveryInfo = cjLogisticsDeliveryStrategy.tracking(trackingNo);
+        var deliveryInfo = cjLogisticsShipmentTrackingStrategy.tracking(trackingNo);
 
         //then
         assertAll(
             () -> assertThat(deliveryInfo.getTrackingNo()).isEqualTo(trackingNo),
             () -> assertThat(deliveryInfo.getCourierCompany()).isEqualTo(CourierCompany.CJ_LOGISTICS),
-            () -> assertThat(deliveryInfo.getShipmentTrackingProgresses()).hasSize(5),
+            () -> assertThat(deliveryInfo.getShipmentProgresses()).hasSize(5),
             () -> assertThat(deliveryInfo.getRecipient().getAddress()).contains("경기도 용인")
         );
 
