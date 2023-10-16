@@ -1,15 +1,16 @@
 package com.gnnny.parcelwizard.infrastructure.external.winionlogis;
 
-import com.gnnny.parcelwizard.domain.shipment.Shipment;
+import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
 import com.gnnny.parcelwizard.domain.shipment.Recipient;
 import com.gnnny.parcelwizard.domain.shipment.Sender;
-import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
+import com.gnnny.parcelwizard.domain.shipment.Shipment;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
+import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.ProgressInfo;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.RecipientInfo;
 import com.gnnny.parcelwizard.shared.DateUtil;
+import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,9 +59,10 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
                         .status(ShipmentStatus.matchedStatus(progressInfo.getSmartStatNm()))
                         .detailStatus(progressInfo.getStatNm())
                         .processingDateTime(
-                            DateUtil.parse(progressInfo.getWorkDt(), "yyyy-MM-dd HH:mm:ss")
-                        )
-                        .build()).toList()
+                            DateUtil.parse(progressInfo.getWorkDt(), "yyyy-MM-dd HH:mm:ss"))
+                        .build())
+                .sorted(Comparator.comparing(ShipmentProgress::getProcessingDateTime))
+                .toList()
             ).build();
     }
 

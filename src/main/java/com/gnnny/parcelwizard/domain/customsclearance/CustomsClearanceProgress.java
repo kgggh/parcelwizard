@@ -13,15 +13,15 @@ public class CustomsClearanceProgress {
     private CustomsClearanceProgressId customsClearanceProgressId;
     private String status;
     private String detailStatus;
-    private LocalDateTime processingTime;
+    private LocalDateTime processingDateTime;
 
     @Builder
     public CustomsClearanceProgress(CustomsClearanceProgressId customsClearanceProgressId,
-        String status, String detailStatus, LocalDateTime processingTime) {
+        String status, String detailStatus, LocalDateTime processingDateTime) {
         this.customsClearanceProgressId = customsClearanceProgressId;
         this.status = status;
         this.detailStatus = detailStatus;
-        this.processingTime = processingTime;
+        this.processingDateTime = processingDateTime;
     }
 
     @Getter

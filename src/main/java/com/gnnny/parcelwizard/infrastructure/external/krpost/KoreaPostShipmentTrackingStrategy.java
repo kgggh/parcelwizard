@@ -9,6 +9,7 @@ import com.gnnny.parcelwizard.domain.shipment.Sender;
 import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.infrastructure.external.krpost.KoreaPostApiResponse.DeliveryDetail;
 import com.gnnny.parcelwizard.shared.DateUtil;
+import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,9 +55,10 @@ public class KoreaPostShipmentTrackingStrategy implements ShipmentTrackingStrate
                             DateUtil.parse(
                                 String.format("%s %s", deliveryProgress.getProcessingDate(),
                                     deliveryProgress.getProcessingTime()),
-                                "yyyy.MM.dd HH:mm")
-                        )
-                        .build()).toList()
+                                "yyyy.MM.dd HH:mm"))
+                        .build())
+                .sorted(Comparator.comparing(ShipmentProgress::getProcessingDateTime))
+                .toList()
             ).build();
     }
 

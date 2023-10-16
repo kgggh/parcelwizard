@@ -5,14 +5,14 @@ import com.gnnny.parcelwizard.application.customsclearance.model.CustomsClearanc
 public record CustomsClearanceProgressTrackingResource(
     String status,
     String detailStatus,
-    String processingTime) {
+    String processingDateTime) {
 
     public CustomsClearanceProgressTrackingResource(
         CustomsClearanceProgressDto customsClearanceProgressDto) {
         this(
             customsClearanceProgressDto.status(),
             customsClearanceProgressDto.detailStatus(),
-            customsClearanceProgressDto.processingTime().toString()
+            customsClearanceProgressDto.processingDateTime().toString()
         );
     }
 }

@@ -6,6 +6,7 @@ import com.gnnny.parcelwizard.domain.customsclearance.Weight;
 import com.gnnny.parcelwizard.domain.customsclearance.WeightUnit;
 import com.gnnny.parcelwizard.infrastructure.external.unipass.UniPassApiServiceKeys.UniPassApiServiceName;
 import com.gnnny.parcelwizard.shared.DateUtil;
+import java.util.Comparator;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,10 @@ public class CustomsClearanceHttpAdapter {
                     .map(i -> CustomsClearanceProgress.builder()
                             .status(i.getCargTrcnRelaBsopTpcd())
                             .detailStatus(i.getBfhnGdncCn())
-                            .processingTime(DateUtil.parse(i.getPrcsDttm(), "yyyyMMddHHmmss"))
-                            .build()
-                    ).toList())
+                            .processingDateTime(DateUtil.parse(i.getPrcsDttm(), "yyyyMMddHHmmss"))
+                            .build())
+                    .sorted(Comparator.comparing(CustomsClearanceProgress::getProcessingDateTime))
+                    .toList())
             .build();
     }
 

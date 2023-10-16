@@ -12,6 +12,7 @@ import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.ScanInfoOutput;
 import com.gnnny.parcelwizard.infrastructure.external.cj.CjApiResponse.WblNoOutput;
 import com.gnnny.parcelwizard.shared.DateUtil;
+import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +73,9 @@ public class CjLogisticsShipmentTrackingStrategy implements ShipmentTrackingStra
                                 String.format("%s %s", scanInfoOutput.getScanDt(),
                                     scanInfoOutput.getScanHms()),
                                 "yyyy-MM-dd HH:mm:ss"))
-                        .build()).toList()
+                        .build())
+                .sorted(Comparator.comparing(ShipmentProgress::getProcessingDateTime))
+                .toList()
             ).build();
     }
 

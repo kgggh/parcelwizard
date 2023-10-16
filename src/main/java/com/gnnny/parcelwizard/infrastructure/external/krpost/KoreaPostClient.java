@@ -57,6 +57,10 @@ public class KoreaPostClient {
     private DeliveryDetail extractDeliveryDetail(Elements elements) {
         String[] extractDeliveryDetailTexts = extractTexts(elements);
 
+        if(extractDeliveryDetailTexts.length < 6) {
+            throw new IllegalArgumentException("잘못된 운송장 번호입니다. 운송장 번호(13자리)");
+        }
+
         if (extractDeliveryDetailTexts[6].contains("처리중")) {
             throw new IllegalStateException("조회되지 않는 운송장 번호입니다.");
         }

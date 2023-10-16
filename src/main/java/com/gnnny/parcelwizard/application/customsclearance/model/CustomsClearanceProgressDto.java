@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 public record CustomsClearanceProgressDto(
     String status,
     String detailStatus,
-    LocalDateTime processingTime) {
+    LocalDateTime processingDateTime) {
 
     public CustomsClearanceProgressDto(CustomsClearanceProgress customsClearanceProgress) {
         this(
             customsClearanceProgress.getStatus(),
             customsClearanceProgress.getDetailStatus(),
-            customsClearanceProgress.getProcessingTime()
+            customsClearanceProgress.getProcessingDateTime()
         );
     }
 }
