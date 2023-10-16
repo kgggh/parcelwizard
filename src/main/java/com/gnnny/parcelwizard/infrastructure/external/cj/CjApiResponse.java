@@ -19,7 +19,7 @@ public class CjApiResponse implements ThirdPartyApiResponse {
 
     @Override
     public boolean isSuccess() {
-        return false;
+        return this.data.get("wblNoOutput") != null;
     }
 
     @Override

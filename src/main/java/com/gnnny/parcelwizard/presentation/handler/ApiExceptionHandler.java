@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
-    public ResponseEntity<Object> handle(IllegalArgumentException e) {
-        log.error(e.getMessage(), e);
-        return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
-    }
-
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handle(RuntimeException e) {
         log.error(e.getMessage(), e);

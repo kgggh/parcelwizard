@@ -28,8 +28,12 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
             WinionLogisApiResponse winionLogisApiResponse = winionLogisClient.getDeliveryProgressInfo(
                 new DeliveryProgressSearchRequest(trackingNo));
 
+            if(!winionLogisApiResponse.isSuccess()) {
+                throw new IllegalStateException("해당 운송장번호가 조회되지 않습니다.");
+            }
+
             return toDomain(trackingNo, winionLogisApiResponse);
-        } catch (IllegalArgumentException | NullPointerException e) {
+        } catch (RuntimeException e) {
             log.error(e.getMessage(), e);
             throw e;
         }

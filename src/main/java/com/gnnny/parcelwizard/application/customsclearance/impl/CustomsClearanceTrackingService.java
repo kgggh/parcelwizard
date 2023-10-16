@@ -5,9 +5,11 @@ import com.gnnny.parcelwizard.application.customsclearance.model.CustomsClearanc
 import com.gnnny.parcelwizard.domain.customsclearance.CustomsClearance;
 import com.gnnny.parcelwizard.infrastructure.external.unipass.CustomsClearanceHttpAdapter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomsClearanceTrackingService implements CustomsClearanceTrackingUseCase {
@@ -16,6 +18,8 @@ public class CustomsClearanceTrackingService implements CustomsClearanceTracking
 
     @Override
     public CustomsClearanceDto getTrackingDetail(Integer year, String houseBlNo) {
+        log.info("통관조회 - {}, {}", year, houseBlNo);
+
         if (year == null || !StringUtils.hasText(houseBlNo)) {
             throw new IllegalArgumentException("년도 혹은 선하증권번호를 확인바랍니다.");
         }

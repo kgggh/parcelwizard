@@ -57,14 +57,15 @@ public class KoreaPostClient {
     private DeliveryDetail extractDeliveryDetail(Elements elements) {
         String[] extractDeliveryDetailTexts = extractTexts(elements);
 
-        if (extractDeliveryDetailTexts.length < 3) {
+
+        if (extractDeliveryDetailTexts.length < 4) {
             throw new IllegalStateException("조회되지 않는 운송장 번호입니다.");
         }
 
         return new DeliveryDetail(
             extractDeliveryDetailTexts[0],
             extractDeliveryDetailTexts[1],
-            extractDeliveryDetailTexts[2]
+            extractDeliveryDetailTexts[3]
         );
     }
 
@@ -76,6 +77,10 @@ public class KoreaPostClient {
 
             if (extractDeliveryProgressesTexts.length == 0) {
                 continue;
+            }
+
+            if(extractDeliveryProgressesTexts.length > 4 && (extractDeliveryProgressesTexts[4].contains("배달"))) {
+                    extractDeliveryProgressesTexts[3] = "배달준비";
             }
 
             deliveryProgresses.add(

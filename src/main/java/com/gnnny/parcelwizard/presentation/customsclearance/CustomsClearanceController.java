@@ -5,11 +5,13 @@ import com.gnnny.parcelwizard.application.customsclearance.model.CustomsClearanc
 import com.gnnny.parcelwizard.presentation.customsclearance.resource.CustomsClearanceTrackingResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CustomsClearanceController {
 
     private final CustomsClearanceTrackingUseCase customsClearanceTrackingUseCase;

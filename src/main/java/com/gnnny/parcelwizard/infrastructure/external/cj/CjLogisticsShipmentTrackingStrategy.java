@@ -30,6 +30,10 @@ public class CjLogisticsShipmentTrackingStrategy implements ShipmentTrackingStra
         try {
             CjApiResponse deliveryDetail = cjLogisticsClient.getDeliveryDetail(trackingNo);
 
+            if(!deliveryDetail.isSuccess()) {
+                throw new IllegalStateException("해당 운송장번호가 조회되지 않습니다.");
+            }
+
             WblNoOutput wblNoOutput = objectMapper.convertValue(
                 deliveryDetail.getData().get("wblNoOutput"), WblNoOutput.class);
 
@@ -41,7 +45,7 @@ public class CjLogisticsShipmentTrackingStrategy implements ShipmentTrackingStra
                     });
 
             return toDomain(wblNoOutput, scanInfoOutput);
-        } catch (IllegalArgumentException | NullPointerException e) {
+        } catch (RuntimeException e) {
             log.error(e.getMessage(), e);
             throw e;
         }
@@ -67,8 +71,7 @@ public class CjLogisticsShipmentTrackingStrategy implements ShipmentTrackingStra
                             DateUtil.parse(
                                 String.format("%s %s", scanInfoOutput.getScanDt(),
                                     scanInfoOutput.getScanHms()),
-                                "yyyy-MM-dd HH:mm:ss")
-                        )
+                                "yyyy-MM-dd HH:mm:ss"))
                         .build()).toList()
             ).build();
     }
