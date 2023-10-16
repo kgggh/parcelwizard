@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/styles.css';
 
 const Courier = () => {
   const [trackingResult, setTrackingResult] = useState(null);
