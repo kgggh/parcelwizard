@@ -1,0 +1,86 @@
+.customs-clearance-tracking-detail {
+  border-collapse: collapse;
+  margin: 1rem auto;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+table {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* 테이블 행 */
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
+
+/* 테이블 올렸을 때 */
+tbody tr:hover {
+  background-color: #d3d3d3;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 15%;
+}
+
+form {
+  text-align: center;
+}
+
+#year,
+#house-bl-no,
+#courier-company,
+#tracking-no,
+#search-button {
+  font-size: 20px;
+}
+
+#home-header {
+    text-align: center;
+    height: 300px;
+}
+#header-logo {
+    width: 100%;
+    height: 100%;
+}
+
+#header-logo:hover {
+    cursor: pointer;
+}
+
+nav {
+    text-align: center;
+}
+
+.customs-clearance-print {
+    margin: 20px;
+}
+
+.courier-print {
+    margin: 20px;
+}
+
+#home-contents {
+    text-align: center;
+}
