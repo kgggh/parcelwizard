@@ -57,8 +57,7 @@ public class KoreaPostClient {
     private DeliveryDetail extractDeliveryDetail(Elements elements) {
         String[] extractDeliveryDetailTexts = extractTexts(elements);
 
-
-        if (extractDeliveryDetailTexts.length < 4) {
+        if (extractDeliveryDetailTexts[6].contains("처리중")) {
             throw new IllegalStateException("조회되지 않는 운송장 번호입니다.");
         }
 
