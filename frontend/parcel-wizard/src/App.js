@@ -1,15 +1,15 @@
-import React from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 
-import Courier from './pages/Courier';
-import CustomsClearance from './pages/CustomsClearance';
-import Home from './pages/Home';
-import headerLogo from './assets/header-icon.png';
+import Courier from "./pages/Courier";
+import CustomsClearance from "./pages/CustomsClearance";
+import Home from "./pages/Home";
+import headerLogo from "./assets/header-icon.png";
 
 const NavigationBar = () => {
   return (
     <nav className="nav">
-      <Link to="/clearance-clearances">통관조회</Link> |{' '}
+      <Link to="/clearance-clearances">통관조회</Link> |{" "}
       <Link to="/couriers">배송조회</Link>
     </nav>
   );
@@ -19,7 +19,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleImageClick = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
