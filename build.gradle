@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.gnnny'
-version = '0.0.1-SNAPSHOT'
+version = '0.1'
 
 java {
     sourceCompatibility = '17'
@@ -58,4 +58,13 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootJar {
+    archivesBaseName = 'parcelwizard'
+    archiveFileName = 'parcel-wizard-api.jar'
+}
+
+jar {
+    enabled = false
 }
