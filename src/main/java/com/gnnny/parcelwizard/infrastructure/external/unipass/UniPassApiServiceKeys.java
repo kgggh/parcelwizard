@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -19,13 +22,21 @@ public class UniPassApiServiceKeys {
     static {
         ObjectMapper objectMapper = new ObjectMapper();
 
+        InputStream inputStream = null;
+
         try {
-            values = objectMapper.readValue(new File(
-                new ClassPathResource("key/unipass_serivce_key.json").getFile().getPath()),
+            inputStream = new ClassPathResource("key/unipass_serivce_key.json").getInputStream();
+            File keyFile =File.createTempFile("unipass_serivce_key",".json");
+
+            FileUtils.copyInputStreamToFile(inputStream, keyFile);
+
+            values = objectMapper.readValue(keyFile,
                 new TypeReference<>() {}
             );
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
