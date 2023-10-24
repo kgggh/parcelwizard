@@ -82,7 +82,7 @@ const Courier = () => {
     };
 
     axios
-      .get('http://localhost/api/v1/shipments/tracking', { params })
+      .get('http://localhost:8081/api/v1/shipments/tracking', { params })
       .then((resposne) => {
         setTrackingResult(resposne.data);
       })
