@@ -30,7 +30,7 @@ const CustomsClearance = () => {
     };
 
     axios
-      .get('http://localhost:8081/api/v1/customs-clearances/tracking', {
+      .get('http://localhost:8080/api/v1/customs-clearances/tracking', {
         params,
       })
       .then((resposne) => {
