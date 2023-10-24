@@ -17,7 +17,7 @@ public class ShipmentController {
 
     private final ShipmentTrackingUseCase shipmentTrackingUseCase;
 
-    @GetMapping("/api/v1/shipments/tracking")
+    @GetMapping("/v1/shipments/tracking")
     public ResponseEntity<ShipmentTrackingResource> get(String courierCompany, String trackingNo) {
         ShipmentDto shipmentDto = shipmentTrackingUseCase.getTrackingDetail(
             CourierCompany.valueOf(courierCompany), trackingNo);

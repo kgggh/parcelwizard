@@ -16,7 +16,7 @@ public class CustomsClearanceController {
 
     private final CustomsClearanceTrackingUseCase customsClearanceTrackingUseCase;
 
-    @GetMapping("/api/v1/customs-clearances/tracking")
+    @GetMapping("/v1/customs-clearances/tracking")
     public ResponseEntity<CustomsClearanceTrackingResource> get(Integer year, String houseBlNo) {
         CustomsClearanceDto customsClearanceDto =
             customsClearanceTrackingUseCase.getTrackingDetail(year, houseBlNo);
