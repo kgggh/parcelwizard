@@ -18,7 +18,7 @@ public class CustomsClearanceTrackingService implements CustomsClearanceTracking
 
     @Override
     public CustomsClearanceDto getTrackingDetail(Integer year, String houseBlNo) {
-        log.info("통관조회 - {}, {}", year, houseBlNo);
+        log.info("[통관조회] - {}, {}", year, houseBlNo);
 
         if (year == null || !StringUtils.hasText(houseBlNo)) {
             throw new IllegalArgumentException("년도 혹은 선하증권번호를 확인바랍니다.");
