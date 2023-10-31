@@ -1,32 +1,28 @@
 package com.gnnny.parcelwizard.infrastructure.external.krpost;
 
-import com.gnnny.parcelwizard.domain.shipment.Shipment;
-import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
-import com.gnnny.parcelwizard.domain.shipment.Recipient;
-import com.gnnny.parcelwizard.domain.shipment.Sender;
 import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
+import com.gnnny.parcelwizard.domain.shipment.*;
 import com.gnnny.parcelwizard.infrastructure.external.krpost.KoreaPostApiResponse.DeliveryDetail;
 import com.gnnny.parcelwizard.shared.DateUtil;
-import java.util.Comparator;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.Comparator;
+import java.util.List;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class KoreaPostShipmentTrackingStrategy implements ShipmentTrackingStrategy {
 
-    private final KoreaPostClient koreaPostClient;
+    private final KoreaPostScrapper koreaPostScrapper;
 
     @Override
     public Shipment tracking(String trackingNo) {
         try {
             KoreaPostApiResponse koreaPostApiResponse =
-                koreaPostClient.getDeliveryProgressInfo(trackingNo);
+                koreaPostScrapper.getDeliveryProgressInfo(trackingNo);
 
             return toDomain(koreaPostApiResponse);
         } catch (IllegalArgumentException e) {
@@ -55,7 +51,7 @@ public class KoreaPostShipmentTrackingStrategy implements ShipmentTrackingStrate
                             DateUtil.parse(
                                 String.format("%s %s", deliveryProgress.getProcessingDate(),
                                     deliveryProgress.getProcessingTime()),
-                                "yyyy.MM.dd HH:mm"))
+                                CourierCompany.KOREA_POST.getDateFormatPattern()))
                         .build())
                 .sorted(Comparator.comparing(ShipmentProgress::getProcessingDateTime))
                 .toList()

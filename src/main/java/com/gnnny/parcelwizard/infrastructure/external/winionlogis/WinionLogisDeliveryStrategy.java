@@ -1,20 +1,17 @@
 package com.gnnny.parcelwizard.infrastructure.external.winionlogis;
 
 import com.gnnny.parcelwizard.application.shipment.ShipmentTrackingStrategy;
-import com.gnnny.parcelwizard.domain.shipment.CourierCompany;
-import com.gnnny.parcelwizard.domain.shipment.Recipient;
-import com.gnnny.parcelwizard.domain.shipment.Sender;
-import com.gnnny.parcelwizard.domain.shipment.Shipment;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentProgress;
-import com.gnnny.parcelwizard.domain.shipment.ShipmentStatus;
+import com.gnnny.parcelwizard.domain.shipment.*;
+import com.gnnny.parcelwizard.infrastructure.external.common.NonExistentTrackingNumberException;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.ProgressInfo;
 import com.gnnny.parcelwizard.infrastructure.external.winionlogis.WinionLogisApiResponse.RecipientInfo;
 import com.gnnny.parcelwizard.shared.DateUtil;
-import java.util.Comparator;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.Comparator;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -25,19 +22,14 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
 
     @Override
     public Shipment tracking(String trackingNo) {
-        try {
-            WinionLogisApiResponse winionLogisApiResponse = winionLogisClient.getDeliveryProgressInfo(
-                new DeliveryProgressSearchRequest(trackingNo));
+        WinionLogisApiResponse winionLogisApiResponse = winionLogisClient.getDeliveryProgressInfo(
+            new DeliveryProgressSearchRequest(trackingNo));
 
-            if(!winionLogisApiResponse.isSuccess()) {
-                throw new IllegalStateException("해당 운송장번호가 조회되지 않습니다.");
-            }
-
-            return toDomain(trackingNo, winionLogisApiResponse);
-        } catch (RuntimeException e) {
-            log.error(e.getMessage(), e);
-            throw e;
+        if(!winionLogisApiResponse.isSuccess()) {
+            throw new NonExistentTrackingNumberException(trackingNo);
         }
+
+        return toDomain(trackingNo, winionLogisApiResponse);
     }
 
     private Shipment toDomain(String trackingNo, WinionLogisApiResponse winionLogisApiResponse) {
@@ -51,7 +43,7 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
                 new Recipient(recipientInfo.getReceiverName(), recipientInfo.getReceiverMobile(),
                     recipientInfo.getReceiverAddr())
             )
-            .sender(new Sender("", "", ""))
+            .sender(new Sender())
             .shipmentProgresses(progressInfos.stream()
                 .map(
                     progressInfo -> ShipmentProgress.builder()
@@ -59,7 +51,7 @@ public class WinionLogisDeliveryStrategy implements ShipmentTrackingStrategy {
                         .status(ShipmentStatus.matchedStatus(progressInfo.getSmartStatNm()))
                         .detailStatus(progressInfo.getStatNm())
                         .processingDateTime(
-                            DateUtil.parse(progressInfo.getWorkDt(), "yyyy-MM-dd HH:mm:ss"))
+                            DateUtil.parse(progressInfo.getWorkDt(), CourierCompany.WINION_LOGIS.getDateFormatPattern()))
                         .build())
                 .sorted(Comparator.comparing(ShipmentProgress::getProcessingDateTime))
                 .toList()

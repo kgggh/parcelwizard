@@ -2,18 +2,14 @@ package com.gnnny.parcelwizard.infrastructure.external.winionlogis;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.gnnny.parcelwizard.infrastructure.external.common.ThirdPartyApiResponse;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WinionLogisApiResponse implements ThirdPartyApiResponse {
 
@@ -39,9 +35,9 @@ public class WinionLogisApiResponse implements ThirdPartyApiResponse {
         return null;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class RecipientInfo {
 
         private String signWayDesc;
@@ -52,9 +48,9 @@ public class WinionLogisApiResponse implements ThirdPartyApiResponse {
         private String rsCount;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class DriverInfo {
 
         private String userNm;
@@ -63,9 +59,9 @@ public class WinionLogisApiResponse implements ThirdPartyApiResponse {
         private String agencyNm;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class ProgressInfo {
 
         private String smartStatNm;

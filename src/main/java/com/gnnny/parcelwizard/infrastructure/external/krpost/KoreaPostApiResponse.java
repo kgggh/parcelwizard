@@ -1,13 +1,12 @@
 package com.gnnny.parcelwizard.infrastructure.external.krpost;
 
-import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
-import java.util.List;
+import com.gnnny.parcelwizard.infrastructure.external.common.ThirdPartyApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class KoreaPostApiResponse implements ThirdPartyApiResponse {
 
@@ -25,7 +24,6 @@ public class KoreaPostApiResponse implements ThirdPartyApiResponse {
     }
 
     @Getter
-    @NoArgsConstructor
     @AllArgsConstructor
     public static class DeliveryProgress {
 
@@ -36,7 +34,6 @@ public class KoreaPostApiResponse implements ThirdPartyApiResponse {
     }
 
     @Getter
-    @NoArgsConstructor
     @AllArgsConstructor
     public static class DeliveryDetail {
 

@@ -1,16 +1,13 @@
 package com.gnnny.parcelwizard.infrastructure.external.cj;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
-import java.util.Map;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.gnnny.parcelwizard.infrastructure.external.common.ThirdPartyApiResponse;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Map;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CjApiResponse implements ThirdPartyApiResponse {
 
     private String resultMessage;
@@ -19,7 +16,7 @@ public class CjApiResponse implements ThirdPartyApiResponse {
 
     @Override
     public boolean isSuccess() {
-        return this.data.get("wblNoOutput") != null;
+        return !CollectionUtils.isEmpty(this.data);
     }
 
     @Override
@@ -27,7 +24,7 @@ public class CjApiResponse implements ThirdPartyApiResponse {
         return null;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class WblNoOutput {
 
@@ -52,7 +49,7 @@ public class CjApiResponse implements ThirdPartyApiResponse {
         private String dlvTel;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ScanInfoOutput {
 

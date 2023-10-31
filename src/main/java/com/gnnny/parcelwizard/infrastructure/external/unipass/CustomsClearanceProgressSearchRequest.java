@@ -2,10 +2,8 @@ package com.gnnny.parcelwizard.infrastructure.external.unipass;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class CustomsClearanceProgressSearchRequest {
 

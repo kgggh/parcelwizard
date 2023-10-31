@@ -6,10 +6,11 @@ import com.gnnny.parcelwizard.domain.customsclearance.Weight;
 import com.gnnny.parcelwizard.domain.customsclearance.WeightUnit;
 import com.gnnny.parcelwizard.infrastructure.external.unipass.UniPassApiServiceKeys.UniPassApiServiceName;
 import com.gnnny.parcelwizard.shared.DateUtil;
-import java.util.Comparator;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,32 +32,35 @@ public class CustomsClearanceHttpAdapter {
         return Optional.ofNullable(toDomain(cargoClearanceProgress));
     }
 
-    private CustomsClearance toDomain(
-        CustomsClearanceProgressResponse customsClearanceProgressResponse) {
+    private CustomsClearanceProgressSearchRequest makeRequestParameter(int year, String houseBlNo) {
+        String apiKey =
+                UniPassApiServiceKeys.getServiceKey(UniPassApiServiceName.CARGO_CUSTOMS_CLEARANCE_PROGRESS);
+
+        return new CustomsClearanceProgressSearchRequest(apiKey, houseBlNo, year);
+    }
+
+    private CustomsClearance toDomain(CustomsClearanceProgressResponse customsClearanceProgressResponse) {
+        CustomsClearanceProgressResponse.Summary summary = customsClearanceProgressResponse.getSummary();
+
         return CustomsClearance.builder()
             .customsClearanceId(null)
-            .houseBlNo(customsClearanceProgressResponse.getSummary().getHblNo())
-            .itemName(customsClearanceProgressResponse.getSummary().getPrnm())
-            .weight(new Weight(
-                Double.parseDouble(customsClearanceProgressResponse.getSummary().getTtwg()),
-                WeightUnit.valueOf(customsClearanceProgressResponse.getSummary().getWghtUt()))
+            .houseBlNo(summary.getHblNo())
+            .itemName(summary.getPrnm())
+            .weight(
+                    new Weight(
+                            Double.parseDouble(summary.getTtwg()),
+                            WeightUnit.valueOf(summary.getWghtUt())
+                    )
             )
             .customsClearanceProgresses(
                 customsClearanceProgressResponse.getProgresses().stream()
-                    .map(i -> CustomsClearanceProgress.builder()
-                            .status(i.getCargTrcnRelaBsopTpcd())
-                            .detailStatus(i.getBfhnGdncCn())
-                            .processingDateTime(DateUtil.parse(i.getPrcsDttm(), "yyyyMMddHHmmss"))
+                    .map(progresses -> CustomsClearanceProgress.builder()
+                            .status(progresses.getCargTrcnRelaBsopTpcd())
+                            .detailStatus(progresses.getBfhnGdncCn())
+                            .processingDateTime(DateUtil.parse(progresses.getPrcsDttm(), "yyyyMMddHHmmss"))
                             .build())
-                    .sorted(Comparator.comparing(CustomsClearanceProgress::getProcessingDateTime))
-                    .toList())
+                    .sorted(Comparator.comparing(CustomsClearanceProgress::getProcessingDateTime)).toList()
+            )
             .build();
-    }
-
-    private CustomsClearanceProgressSearchRequest makeRequestParameter(int year, String houseBlNo) {
-        String apiKey =
-            UniPassApiServiceKeys.getServiceKey(UniPassApiServiceName.CARGO_CUSTOMS_CLEARANCE_PROGRESS);
-
-        return new CustomsClearanceProgressSearchRequest(apiKey, houseBlNo, year);
     }
 }

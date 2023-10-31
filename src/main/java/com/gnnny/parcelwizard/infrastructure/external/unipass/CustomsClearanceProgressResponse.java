@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.gnnny.parcelwizard.infrastructure.external.ThirdPartyApiResponse;
+import com.gnnny.parcelwizard.infrastructure.external.common.ThirdPartyApiResponse;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.Data;
 
-@Data
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JacksonXmlRootElement(localName = "cargCsclPrgsInfoQryRtnVo")
 public class CustomsClearanceProgressResponse implements ThirdPartyApiResponse {
@@ -36,7 +37,7 @@ public class CustomsClearanceProgressResponse implements ThirdPartyApiResponse {
         return null;
     }
 
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Summary {
         // 운송장 번호
@@ -55,7 +56,7 @@ public class CustomsClearanceProgressResponse implements ThirdPartyApiResponse {
         private String frwrEntsConm;
 
     }
-    @Data
+    @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Progress {
 
