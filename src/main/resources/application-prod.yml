@@ -15,5 +15,4 @@ external-api:
       base-url: https://winionlogis.com
 
 logging:
-  config: classpath:log/logback-local.xml
-
+  config: classpath:log/logback-prod.xml
